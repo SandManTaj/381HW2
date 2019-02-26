@@ -20,25 +20,18 @@ def message(arr):
             return d
     return -1
 
-#creates errors in binary array
-def error(p):
-    arr = np.copy(p) #creates a copy of the array in order to avoid editting the original array
-    #loops through the whole array and adds errors based on the probability of error
-    for i in range(0, len(arr)):
-        #if the number in the array is not binary, the program exits
-        if (arr[i] != 1 or arr[i] != 0):
-            sys.exit("Incorrect input!")
-        #potentially replaces the current 0 with 1
-        if (arr[i] == 0):
-            r = np.random.random()
-            if (r <= 0.05):
-                arr[i] = 1
-        #potentially replaces the current 1 with 0
-        if (arr[i] == 1):
-            r = np.random.random()
-            if (r <= 0.03):
-                arr[i] = 0
-    return arr
+#creates errors in the sent messages based on probability
+def error(s):
+    if(s == 0):
+        r = np.random.random()
+        if (r <= 0.05):
+            return 1      
+        #potentially changes one or more ones to zeros    
+    if (s == 1):
+        r = np.random.random()
+        if (r <= 0.03):
+            return 0
+    return s
 
 def main():
     prob = np.array([0.6, 0.4]) #array to store porbabilities
@@ -48,11 +41,10 @@ def main():
     #creates 100000 random messages based on the probility
     for i in range(0, 100000):
         s = message(prob)
-        sArr = np.append(sArr, s)
-    rArr = error(sArr) #creates a recieved array with the potential for errors
-    #loops through the sent and recieved arrays to count the number of identical messages
-    for i in range(0, len(sArr)):
-        if (sArr[i] == rArr[i]):
+        zeros = 0
+        ones = 0
+        r = error(s)
+        if (s == r):
             counter += 1
     print('Prob: ', counter/100000)
 
