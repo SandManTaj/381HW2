@@ -57,8 +57,6 @@ def main():
         #if there were more ones and the sent message is a one, the counter increments
         elif (ones > zeros and s == 1):
             counter += 1
-    
-        
-    print('Prob: ', counter/100000)
+    print('Prob: ', 1 - (counter/100000)) #prints out probability
 
 main()

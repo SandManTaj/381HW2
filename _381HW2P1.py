@@ -46,6 +46,6 @@ def main():
         if (s == r):
             counter += 1 #increments the counter if the sent and recieved
                          #messages are the same
-    print('Prob: ', counter/100000)
+    print('Prob: ', 1 - (counter/100000)) #prints out probability
 
 main()

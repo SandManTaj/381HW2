@@ -47,6 +47,6 @@ def main():
             sCounter += 1 #increments the sent timer if the sent message is 1
             if (r == 1):
                 counter += 1 #increments the counter if the recieved message is 1
-    print('Prob: ', counter/sCounter)
+    print('Prob: ', counter/sCounter) #prints out prbability
 
 main()
