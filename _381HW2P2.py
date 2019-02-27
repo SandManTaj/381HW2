@@ -22,32 +22,31 @@ def message(arr):
 
 #creates errors in the sent messages based on probability
 def error(s):
+    #potentially changes a zero to one
     if(s == 0):
         r = np.random.random()
         if (r <= 0.05):
             return 1      
-        #potentially changes one or more ones to zeros    
+    #potentially changes a one to zero    
     if (s == 1):
         r = np.random.random()
         if (r <= 0.03):
             return 0
+    #returns the orginial message if no change is made
     return s
 
 def main():
     prob = np.array([0.6, 0.4]) #array to store the probabilty
-    sArr = np.array([]) #array to store sent messages
     counter = 0 #counts the number of times 1 was correctly recieved
     sCounter = 0 #counts the number of times 1 was sent
-    #creates a random array of sent messages
+    #creates 100000 messages
     for i in range(0, 100000):
-        s = message(prob)
-        zeros = 0
-        ones = 0
-        r = error(s)
+        s = message(prob) #stores a sent message
+        r = error(s) #stores a recieved message with the chance for error
         if (s == 1):
-            sCounter += 1
+            sCounter += 1 #increments the sent timer if the sent message is 1
             if (r == 1):
-                counter += 1
+                counter += 1 #increments the counter if the recieved message is 1
     print('Prob: ', counter/sCounter)
 
 main()

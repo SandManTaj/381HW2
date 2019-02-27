@@ -22,15 +22,17 @@ def message(arr):
 
 #creates errors in the sent messages based on probability
 def error(s):
+    #potentially changes a zero to one
     if(s == 0):
         r = np.random.random()
         if (r <= 0.05):
             return 1      
-        #potentially changes one or more ones to zeros    
+    #potentially changes a one to zero    
     if (s == 1):
         r = np.random.random()
         if (r <= 0.03):
             return 0
+    #returns the orginial message if no change is made
     return s
 
 def main():
@@ -39,17 +41,20 @@ def main():
                 #as the recieved one
     #creates 100000 messages
     for i in range(0, 100000):
-        s = message(prob)
-        zeros = 0
-        ones = 0
+        s = message(prob) #stores a sent message
+        zeros = 0 #counts the number of zeros
+        ones = 0 #counts the number of ones
+        #loops through the sent message three times
         for j in range(0, 3):
             r = error(s)
             if (r == 0):
-                zeros += 1
+                zeros += 1 #increments if the recieved message is zero
             elif (r == 1):
-                ones += 1
+                ones += 1 #increments if the recieved message is one
+        #if there were more zeros and the sent message is zero, the counter increments
         if (zeros > ones and s == 0):
             counter += 1
+        #if there were more ones and the sent message is a one, the counter increments
         elif (ones > zeros and s == 1):
             counter += 1
     
